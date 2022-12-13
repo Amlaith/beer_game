@@ -96,12 +96,12 @@ chain[3].next = factory
 
 consumer.play();
 
-for a in chain:
-  print(a)
-  print(a.stock_log)
-  print(a.deficit_log) 
-  print(a.balance)
-  print()
+# for a in chain:
+#   print(a)
+#   print(a.stock_log)
+#   print(a.deficit_log) 
+#   print(a.balance)
+#   print()
 
 # consumer.received
 st.write('# Beer Game')
