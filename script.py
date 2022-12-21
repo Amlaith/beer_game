@@ -120,7 +120,7 @@ consumer.play();
 # Итоговый график
 fig, ax = plt.subplots()
 for player in chain:
-  ax = sns.lineplot(x=list(range(len(consumer.orders) + 1)), y=player.balance, label=player)
+  ax = plt.plot(player.balance, label=player)
 st.pyplot(fig)
 
 
