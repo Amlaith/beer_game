@@ -121,6 +121,7 @@ consumer.play();
 fig, ax = plt.subplots()
 for player in chain:
   ax = plt.plot(player.balance, label=player)
+leg = plt.legend()
 st.pyplot(fig)
 
 
