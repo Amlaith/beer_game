@@ -10,6 +10,7 @@ Original file is located at
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
+import os
 
 
 # Объявления классов агантов
@@ -78,8 +79,9 @@ st.write('# Beer Game')
 
 
 # Иллюстрации процесса игры
-st.image('media\order_flow.png')
-st.image('media\goods_flow.png')
+path = os.path.dirname(__file__)
+st.image(path+'/media/order_flow.png')
+st.image(path+'/media/goods_flow.png')
 
 
 # Параметры игры
