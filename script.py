@@ -11,11 +11,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
 
+
+# Объявления классов агантов
 class Agent():
   def __init__(self, prev=None, next=None):
     self.prev = prev
     self.next = next
-
 
 class Factory(Agent):
   def __init__(self, prev=None):
@@ -35,7 +36,6 @@ class Consumer(Agent):
       self.received.append(self.next.turn(order))
     return self.received
 
-
 class Player(Agent):
   def __init__(self, prev=None, next=None, panic=1, name='Anonymous'):
     super().__init__(prev, next)
@@ -43,14 +43,14 @@ class Player(Agent):
     self.panic = panic
     self.stock = 16
     self.deficit = 0
-    self.stock_log = []
-    self.deficit_log = []
+    self.stock_log = [self.stock]
+    self.deficit_log = [self.deficit]
     self.balance = [self.stock]
 
   def __repr__(self):
     return self.name
 
-    
+  # Действия игрока в каждый ход  
   def turn(self, from_prev):
     to_ship = from_prev + self.deficit  # Надо отгрузить
     if to_ship > self.stock: # Если не хватает - дефицит
@@ -75,6 +75,11 @@ class Player(Agent):
 
 # Заголовок
 st.write('# Beer Game')
+
+
+# Иллюстрации процесса игры
+st.image('media\order_flow.png')
+st.image('media\goods_flow.png')
 
 
 # Параметры игры
@@ -122,6 +127,29 @@ fig, ax = plt.subplots()
 for player in chain:
   ax = plt.plot(player.balance, label=player)
 leg = plt.legend()
+plt.ylabel('Штраф')
+plt.xlabel('Неделя')
+plt.title('Размер штрафа')
+st.pyplot(fig)
+
+# График склада
+fig, ax = plt.subplots()
+for player in chain:
+  ax = plt.plot(player.stock_log, label=player)
+leg = plt.legend()
+plt.ylabel('Наличие')
+plt.xlabel('Неделя')
+plt.title('Наличие на складе')
+st.pyplot(fig)
+
+# График дефицита
+fig, ax = plt.subplots()
+for player in chain:
+  ax = plt.plot(player.deficit_log, label=player)
+leg = plt.legend()
+plt.ylabel('Дефицит')
+plt.xlabel('Неделя')
+plt.title('Размер дефицита')
 st.pyplot(fig)
 
 
